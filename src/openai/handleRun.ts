@@ -17,6 +17,7 @@ export async function handleRunCalls(run: Run, client: OpenAI, thread: Thread): 
     const toolCalls = run.required_action?.submit_tool_outputs?.tool_calls;
     if(!toolCalls) return run;
 
+    // creates an array of promises that wil process all tool calls in parallel using Promise.all
     const toolOutputs = await Promise.all(toolCalls.map(async (tool) => {
         // this tools is from allTools.ts
         const toolConfig = tools[tool.function.name];
@@ -24,7 +25,7 @@ export async function handleRunCalls(run: Run, client: OpenAI, thread: Thread): 
             console.error(`Tool ${tool.function.name} not found`);
             return null;
         }
-
+        // Parse all function arguments to JSON, call the tool's handler with argument and return successful result with toolID and output
         try{
             const args = JSON.parse(tool.function.arguments);
             const output = await toolConfig.handler(args);

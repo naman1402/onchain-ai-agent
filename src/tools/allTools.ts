@@ -1,3 +1,5 @@
+import { getBalanceTool } from "./get_balance";
+
 export interface ToolConfig<T = any> {
     definition:{
         type: `function`;
@@ -17,4 +19,5 @@ export interface ToolConfig<T = any> {
 
 export const tools: Record<string,  ToolConfig> = {
     // add more tools, 
+    get_balance: getBalanceTool
 }

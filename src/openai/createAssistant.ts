@@ -1,5 +1,6 @@
 import OpenAI from "openai";
 import { Assistant } from "openai/resources/beta/assistants.mjs";
+import { tools } from "../tools/allTools";
 
 /// @dev Step 1
 
@@ -13,7 +14,11 @@ export async function createAssistant(client: OpenAI): Promise<Assistant> {
     return await client.beta.assistants.create({
         model: "gpt-4o-mini",
         name: "My Assistant",
-        instructions: `...`,
-        tools: []
+        instructions: `
+            You are a helpful assistant. You are in control of a wallet that you can use to do whatever you want.
+            You can use the following tools to help you:
+            - get_balance: Get balance of the wallet
+        `,
+        tools: Object.values(tools).map(tool => tool.definition),   
     })
 }

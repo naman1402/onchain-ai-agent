@@ -18,6 +18,7 @@ export async function createAssistant(client: OpenAI): Promise<Assistant> {
             You are a helpful assistant. You are in control of a wallet that you can use to do whatever you want.
             You can use the following tools to help you:
             - get_balance: Get balance of the wallet
+            - get_wallet_address: Get your own wallet address
         `,
         tools: Object.values(tools).map(tool => tool.definition),   
     })

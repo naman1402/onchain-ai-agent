@@ -1,0 +1,1 @@
+viem: library for interacting with Ethereum and other EVM-compatible chains. Alternative to ethers.js.

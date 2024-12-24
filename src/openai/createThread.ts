@@ -11,12 +11,15 @@ import { Thread } from "openai/resources/beta/threads/threads.mjs";
  * @param message - The initial message to be added to the new thread.
  * @returns The newly created thread.
  */
-export async function createThread(client: OpenAI, message: string): Promise<Thread> {
+export async function createThread(client: OpenAI, message?: string): Promise<Thread> {
     const thread = await client.beta.threads.create()
-    await client.beta.threads.messages.create(thread.id, {
-        role: "user",
-        content: message
-    })
+
+    if (message) {
+        await client.beta.threads.messages.create(thread.id, {
+            role: "user",
+            content: message
+        })
+    }
 
     return thread;
 }

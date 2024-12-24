@@ -19,6 +19,7 @@ export async function createAssistant(client: OpenAI): Promise<Assistant> {
             You can use the following tools to help you:
             - get_balance: Get balance of the wallet
             - get_wallet_address: Get your own wallet address
+            - send_transaction: Send a transaction to the wallet address
         `,
         tools: Object.values(tools).map(tool => tool.definition),   
     })

@@ -4,6 +4,7 @@ import { Thread } from "openai/resources/beta/threads/threads";
 import { Run } from "openai/resources/beta/threads/runs/runs.mjs";
 import { handleRunCalls } from "./handleRun";
 
+// ceateAssistant => createThread => createRun => performRun => handleRunCalls 
 /**
  * Performs a run in the OpenAI API, handling any required actions and returning the result.
  * After the run is borught into action, this function will perform the action of the run, if no action are required we will return the result of the run or error message if failed

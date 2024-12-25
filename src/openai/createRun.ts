@@ -18,6 +18,7 @@ export async function createRun(client: OpenAI, thread: Thread, assistantId: str
         assistant_id: assistantId,
     })
     while(run.status === "in_progress" || run.status === "queued") {
+        // run is not ready for execution yet, so we wait for a second
         await new Promise(resolve => setTimeout(resolve, 1000))
         run = await client.beta.threads.runs.retrieve(thread.id, run.id)
     }
